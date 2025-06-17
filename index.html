@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="imagens/flavicon .jpg" type="image/x-icon" />
+
+  <title>Yunwei - Culinária Chinesa</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+ body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #0A3204;
+  color: white;
+  padding: 16px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.header-row input::placeholder {
+  color: white;
+  opacity: 1; /* Garante que o branco fique visível */
+}
+
+.header-row img {
+  width: 250px;
+  height: auto;
+}
+
+.header-row input {
+  padding: 10px;
+  width: 200px;
+  border-radius: 8px;
+  background-color: rgb(60, 90, 41);
+  border: 1px solid rgb(97, 146, 66);
+  color: white;
+  flex-shrink: 0;
+}
+
+#menu {
+  display: flex;
+  gap: 15px;
+  flex-grow: 1;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #ccc;
+}
+
+#menu span {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#menu span.active {
+  border-bottom: 2px solid white;
+  padding-bottom: 4px;
+  color: white;
+}
+
+
+    section {
+      margin-top: 30px;
+      background-color:#373046 ;
+      height: 100%;
+    }
+
+    h2 {
+      font-size: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 18px;
+      background-color: #2f3242 ;
+      padding: 20px;
+    }
+
+    .card {
+      background-color:#363D46;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 400px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 12px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: #aaa;
+      margin: 0 0 6px;
+    }
+
+    .card span {
+      color: #c9a24b;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      background-color: #c9a24b;
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b38e3d;
+    }
+    @media (max-width: 968px) {
+  .header-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-row input {
+    width: 100%;
+  }
+
+  #menu {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  #menu span {
+    flex: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: #1a3d12;
+    margin: 4px 0;
+  }
+
+  section {
+    padding: 10px;
+  }
+    section {
+      margin-top: 30px;
+      background-color:#373046 ;
+      height: 100%;
+    }
+
+  h2 {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .card h3 {
+    font-size: 13px;
+  }
+
+  .card p {
+    font-size: 11px;
+  }
+
+  .card span {
+    font-size: 12px;
+  }
+
+  footer {
+    flex-direction: column;
+    padding: 16px 0;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+ <header>
+  <div class="header-row">
+    <img src="imagens/Logo Restaurante Charme-10.jpg" alt="Yunwei logo" />
+
+    <nav id="menu">
+      <span class="active" data-category="aperitivos">Aperitivos</span>
+      <span data-category="refeicoes">Refeições</span>
+      <span data-category="saladas">Saladas</span>
+      <span data-category="prato-principal">Prato Principal</span>
+    </nav>
+
+    <input type="text" placeholder="Buscar..." />
+  </div>
+</header>
+
+
+
+  <section>
+    <h2 id="categoria-titulo">Aperitivos</h2>
+    <div class="grid" id="product-grid"></div>
+  </section>
+
+  <footer>
+    <button>VER PEDIDOS</button>
+  </footer>
+
+ <script>
+  const produtosPorCategoria = {
+    'aperitivos': [
+      {
+        title: "Panda Pão de Carne",
+        description: "Recheio de carne com gengibre, cebolinha e vegetais.",
+        price: "R$ 02,00",
+        image: "imagens/028a636ce4b3f99490ff574be7582d819a89cb88.png"
+      },
+      {
+        title: "Panda Pão de Vegetais",
+        description: "Recheio de cogumelos Shitake com vegetais.",
+        price: "R$ 00,00",
+        image: "imagens/c4e7c662ef4a9f898fcca95f55f75d8308703017.png"
+      },
+      {
+        title: "Corte Wei ao Molho Negro",
+        description: "Rosbife de carne músculo defumado e temperado com especiarias chinesas.",
+        price: "R$ 00,00",
+        image: "imagens/415c56a3c3758f12a7b67906ffd8e2fd5e2e38fa (1).png"
+      },
+      {
+        title: "Estalido da Floresta",
+        description: "Shimeji branco, pimentao vermelho, pimentao verde.",
+        price: "R$ 00,00",
+        image: "imagens/ffdb6aad439844355f34cba00be7d25ee2e9f536.png"
+      },
+      {
+        title: "Delícia Crocante do Oceano",
+        description: "Camarão, pão formado sem cascra adosante leite condensado wasbi gengilim branco e preto.",
+        price: "R$ 00,00",
+        image: "imagens/6af76c5a562a727a8a346a79ff0fa11791aee8e8.png"
+      },
+      {
+        title: "Estalido do Mar",
+        description: "Lula, pimentao verde, pimentao vermelho, cebola.",
+        price: "R$ 00,00",
+        image: "imagens/34dece0ecaba699a54c375f375e1a68fee0c7c28.png"
+      }
+    ],
+    'refeicoes': [
+      {
+        title: "Tesouro Agridoce de Lombinho",
+        description: "Filé mignon suíno com molho agridoce.",
+        price: "R$ 00,00",
+        image: "imagens/1471ee4a6cdde8deb7c1494f4503f27c92a0d6ac.png"
+      },
+      {
+        title: "Pipoca de camarão crocante",
+        description: "Camarao sem casca 7cm.",
+        price: "R$ 00,00",
+        image: "imagens/dd567fa6c49aafad2ced6e36442d5cde1e66b7b9.png"
+      },
+      {
+        title: "Brilho Agridoce de Abacaxi e Frango",
+        description: "Peito de frango pimentao de verde vermelho amarelo cebola.",
+        price: "R$ 00,00",
+        image: "imagens/5fbd7dadeec4e86ccbdb74b2ec6261f248b02d28.png"
+      },
+      {
+        title: "Peixe ao Vapor",
+        description: "Robalo 30cm cebolinha gengibre e pimentao vermelho.",
+        price: "R$ 00,00",
+        image: "imagens/peixe a vapor.jpg"
+      },
+      {
+        title: "Bailarinos do Mar ao Alho",
+        description: "",
+        price: "R$ 00,00",
+        image: "imagens/515112781c6cba08178c84e170b99057386c798f - Copia.png"
+      },
+      {
+        title: "Suspiro de Sichuan",
+        description: "File mignon de suina cenoura pimentao verde cogumelo preto cebolinha alho.",
+        price: "R$ 00,00",
+        image: "imagens/b05d0c3e9f5e26fceff8ee9b0bf02d6906770d0e.png"
+      },
+      {
+        title: "Kung Bao Frango",
+        description: "Peito de frango com pepino cenoura, cebolinha e amendoim.",
+        price: "R$ 00,00",
+        image: "imagens/37e03bcc4adeca70d7de29af660f44868eb9a07a - Copia.png"
+      },
+      {
+        title: "Brilho Oriental de Bifum e Carne",
+        description: "File mignon de boi com pimentão vermelho e cebolinha.",
+        price: "R$ 00,00",
+        image: "imagens/bifum.jpg"
+      },
+      {
+        title: "Kung-Fu Yakisoba",
+        description: "",
+        price: "R$ 00,00",
+        image: "imagens/40201b2764ffef62aef35ceaff407456f3bcad92 - Copia.png"
+      },
+      {
+        title: "Yakisoba de Carne Clássico",
+        description: "Fariha de trigo, file mignon de boi, camarao, repolho, legumes de soja e cenoura.",
+        price: "R$ 00,00",
+        image: "imagens/yakisoba de carne clássico.jpg"
+      },
+      {
+        title: "Mapo Tofu",
+        description: "Mapo Tofu.",
+        price: "R$ 00,00",
+        image: "imagens/mapo tofu.jpg"
+      },
+      {
+        title: "Pancetta Ardente do Oriente",
+        description: "Pancetta Glaceada no Wok com Pimenta Fresca e Alho-Poró.",
+        price: "R$ 00,00",
+        image: "imagens/64019ba41f87e9b5f7fee892f2a10fc542d22f3d.png"
+      },
+      {
+        title: "Primavera de Jiangnan",
+        description: "Salsão fino , Tofu defumado, pimentão vermelho",
+        price: "R$ 00,00",
+        image: "imagens/9c985645f633e0949176e0764723f2e8f9d47791 - Copia - Copia.png"
+      },
+      {
+        title: "Tiras do Imperador",
+        description: "Batata, pimentão verde, pimentão vermelho",
+        price: "R$ 00,00",
+        image: "imagens/4ee9b5516d27f595f53e60e771f91fdd09e8324a - Copia - Copia.png"
+      }
+
+    ],
+    'saladas': [
+      {
+        title: "Vegetais Mix",
+        description: "",
+        price: "R$ 00,00",
+        image: "imagens/9c985645f633e0949176e0764723f2e8f9d47791 - Copia - Copia.png"
+      },
+      {
+        title: "Pétalas apimentadas de cogumelo",
+        description: "Cogumelo/pimenta picadinha/coentro.",
+        price: "R$ 00,00",
+        image: "imagens/petalas apimentadas.jpg"
+      },
+      {
+        title: "Brilho Fresco de Tiras de Tofu",
+        description: "Macarrão com tofu, pepino, cenoura, coentro.",
+        price: "R$ 00,00",
+        image: "imagens/brilho fresco de tiras de tofu.jpg"
+      },
+      {
+        title: "Folhas de Névoa",
+        description: "Farinha de trigo, repolho, cenoura, pepino, coentro, cebolinha.",
+        price: "R$ 00,00",
+        image: "imagens/folhasdenovoa.jpg"
+      }
+    ],
+    'prato-principal': [
+      {
+        title: "Arroz Chinês",
+        description: "Arroz da loja chinesa /ovos/ milho/cenora/ pepino/cebolinha/salsicha.",
+        price: "R$ 00,00",
+        image: "imagens/arroz chines.jpg"
+      },
+       {
+        title: "Sopro do Norte – Lámen com Carne cozida lentamente",
+        description: "",
+        price: "R$ 00,00",
+        image: "imagens/c070cf7e9f239f9a35dbc18c3e767cc79118bd08.png"
+      },
+       {
+        title: "Núvem de Arroz",
+        description: "Arroz da loja chinesa /ovos/ milho/cenora/ pepino/cebolinha/salsicha.",
+        price: "R$ 00,00",
+        image: "imagens/27107c617889f162e01f2ca0f485271b60147fbc.png"
+      },
+       {
+        title: "Joia Recheada Xi'an",
+        description: "Costela de boi, pimentao verde,cebola branca, farinha.",
+        price: "R$ 00,00",
+        image: "imagens/f8421119821e1212b869d8c5101e8273b1825963 - Copia - Copia.jpg"
+      }
+    ]
+  };
+
+  const grid = document.getElementById('product-grid');
+  const titulo = document.getElementById('categoria-titulo');
+  const menuItems = document.querySelectorAll('#menu span');
+  const searchInput = document.querySelector('header input');
+
+  let categoriaAtual = 'aperitivos';
+
+  function carregarProdutos(categoria, filtro = "") {
+    categoriaAtual = categoria;
+    grid.innerHTML = '';
+    titulo.textContent = capitalize(categoria.replace('-', ' '));
+
+    const produtos = produtosPorCategoria[categoria] || [];
+
+    const filtrados = produtos.filter(p => {
+      const termo = filtro.toLowerCase();
+      return (
+        p.title.toLowerCase().includes(termo) ||
+        p.description.toLowerCase().includes(termo)
+      );
+    });
+
+    if (filtrados.length === 0) {
+      grid.innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>Nenhum item encontrado.</p>";
+    }
+
+    filtrados.forEach(prod => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${prod.image}" alt="${prod.title}" />
+        <div class="card-content">
+          <h3>${prod.title}</h3>
+          <p>${prod.description}</p>
+          <span>${prod.price}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      menuItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      const categoria = item.getAttribute('data-category');
+      carregarProdutos(categoria, searchInput.value);
+    });
+  });
+
+  searchInput.addEventListener('input', () => {
+    carregarProdutos(categoriaAtual, searchInput.value);
+  });
+
+  // Inicializa com a categoria padrão
+  carregarProdutos('aperitivos');
+</script>
+
+</body>
+</html>
