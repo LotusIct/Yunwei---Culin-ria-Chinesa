@@ -221,7 +221,7 @@ header {
 
     <nav id="menu">
       <span data-category="prato-principal">Executivo</span>
-      <span data-category="aperitivos">Entrada</span>
+      <span data-category="entrada">Entrada</span>
       <span data-category="refeições">Prato Pincipal</span>
       <span data-category="sobremesas">Sobremesa</span>
     </nav>
@@ -243,7 +243,7 @@ header {
 
  <script>
   const produtosPorCategoria = {
-    'aperitivos': [
+    'entrada': [
       {
         title: "01 - Panda Pão de Carne",
         description: "Pão macio cozido no vapor, recheado com carne bovina, gengibre e cebolinha.",
@@ -373,8 +373,8 @@ header {
         image: "imagens/mapo tofu.jpg"
       },
       {
-        title: "17 - Barriga de Porco Picante",
-        description: "Fitas de pancetta cozidas e depois salteadas no wok com alho-poró, pimenta fresca e molho de feijão fermentado.",
+        title: "17 - Pancetta Ardente do Oriente",
+        description: "Pancetta Galceada no Wok com pimenta freca e alho-poró.",
         price: "R$ 00,00",
         image: "imagens/64019ba41f87e9b5f7fee892f2a10fc542d22f3d.png"
       },
@@ -451,7 +451,7 @@ header {
   const menuItems = document.querySelectorAll('#menu span');
   const searchInput = document.querySelector('header input');
 
-  let categoriaAtual = 'aperitivos';
+  let categoriaAtual = 'entrada';
 
   function carregarProdutos(categoria, filtro = "") {
     categoriaAtual = categoria;
