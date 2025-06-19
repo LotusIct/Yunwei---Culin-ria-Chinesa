@@ -206,6 +206,11 @@ header {
     font-size: 16px;
   }
 }
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
   </style>
 </head>
@@ -215,7 +220,7 @@ header {
     <img src="imagens/Logo Restaurante Charme-10.jpg" alt="Yunwei logo" />
 
     <nav id="menu">
-      <span class="active" data-category="aperitivos">Entrada</span>
+      <span data-category="aperitivos">Entrada</span>
       <span data-category="refeições">Prato Pincipal</span>
       <span data-category="prato-principal">Executivo</span>
       <span data-category="sobremesas">Sobremesa</span>
@@ -228,7 +233,7 @@ header {
 
 
   <section>
-    <h2 id="categoria-titulo">Aperitivos</h2>
+    <h2 id="categoria-titulo"></h2>
     <div class="grid" id="product-grid"></div>
   </section>
 
@@ -498,9 +503,10 @@ header {
   searchInput.addEventListener('input', () => {
     carregarProdutos(categoriaAtual, searchInput.value);
   });
-
+document.querySelector('#menu span[data-category="prato-principal"]').classList.add('active');
   // Inicializa com a categoria padrão
-  carregarProdutos('aperitivos');
+ carregarProdutos('prato-principal');
+
 </script>
 
 </body>
